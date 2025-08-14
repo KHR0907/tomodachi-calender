@@ -2,7 +2,6 @@ import './globals.css';
 import { ReactNode } from 'react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata = {
@@ -20,18 +19,16 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <header className="app-header">
           <Link className="brand" href="/">📅 Tomodachi Calendar</Link>
           <nav className="nav">
-            {user ? (
-              <>
-                {user.image ? (
-                  <Image src={user.image} alt="avatar" width={24} height={24} className="avatar" />
-                ) : null}
-                <span className="user">{user.name}</span>
-                <a className="btn ghost" href="/api/auth/signout">Logout</a>
-              </>
-            ) : (
-              <a className="btn primary" href="/api/auth/signin">Login with Discord</a>
-            )}
-          </nav>
+  {user ? (
+    <>
+      {/* 로그아웃 */}
+      <Link className="btn ghost" href="/api/auth/signout">Logout</Link>
+    </>
+  ) : (
+    /* 로그인 */
+    <Link className="btn primary" href="/api/auth/signin">Login with Discord</Link>
+  )}
+</nav>
         </header>
         <main className="container">{children}</main>
       </body>

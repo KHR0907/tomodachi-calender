@@ -128,21 +128,21 @@ export default function CalendarBoard({
 
   return (
     <div className="calendar-wrap">
-      <Calendar<EventItem>
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        selectable
-        onSelectSlot={handleSelectSlot}
-        views={['month']}       // ← 월 뷰만
-        view={view}
-        onView={(v) => setView(v)}
-        popup
-        culture="ko"
-        components={components}
-        toolbar
-      />
+<Calendar<EventItem>
+  localizer={localizer}
+  events={events}
+  startAccessor="start"
+  endAccessor="end"
+  selectable
+  onSelectSlot={handleSelectSlot}
+  views={['month']}        // 월 뷰만
+  view={view}
+  onView={(v) => setView(v)}
+  popup
+  culture="ko"
+  components={components}
+  eventPropGetter={eventPropGetter}  // ← 이 줄이 있어야 경고 없음
+/>
     </div>
   );
 }
