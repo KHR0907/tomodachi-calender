@@ -1,26 +1,56 @@
-@import "tailwindcss";
+/* 기본 */
+:root { --border: #e5e7eb; --text: #111827; --muted: #6b7280; --bg: #f9fafb; }
+html, body { height: 100%; margin: 0; color: var(--text); background: var(--bg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; }
+* { box-sizing: border-box; }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 레이아웃/헤더 */
+.app-header {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: #fff; border-bottom: 1px solid var(--border);
+}
+.brand { font-weight: 700; text-decoration: none; color: #111; }
+.nav { display: flex; align-items: center; gap: 10px; }
+.avatar { border-radius: 50%; }
+.user { font-size: 14px; color: var(--muted); }
+
+.btn { padding: 6px 10px; border-radius: 8px; text-decoration: none; font-size: 14px; }
+.btn.primary { background: #5865f2; color: #fff; }
+.btn.ghost { border: 1px solid var(--border); color: #111; background: #fff; }
+
+.container { padding: 16px; }
+
+/* 캘린더 컨테이너 */
+.calendar-wrap {
+  height: calc(100vh - 80px);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  overflow: hidden;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* react-big-calendar 오버라이드 (월 뷰) */
+.rbc-month-view { border: none; }
+.rbc-month-row + .rbc-month-row { border-top: 1px solid var(--border); }
+.rbc-header { padding: 8px 0; font-weight: 600; border-bottom: 1px solid var(--border); }
+.rbc-date-cell { padding: 4px; color: var(--muted); }
+.rbc-off-range { color: #c4c7cf; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 이벤트 칩 */
+.event-chip {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 2px 6px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
 }
+.event-inner { display: flex; align-items: center; gap: 6px; }
+.event-inner .badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 0 6px; font-size: 11px; border-radius: 6px;
+  background: rgba(255,255,255,0.7); border: 1px solid rgba(0,0,0,0.05);
+}
+.event-inner .title { font-size: 12px; font-weight: 600; color: #111; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* 선택 드래그 시 하이라이트 */
+.rbc-selected-cell { background: #eef2ff !important; }
