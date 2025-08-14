@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+// ❌ 제거: import { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import kv from '@/lib/kv';
@@ -16,9 +17,9 @@ export interface CalendarEvent {
   allDay?: boolean;
 }
 
-// /api/events/[id] GET
+// ✅ GET
 export async function GET(
-  _req: NextRequest,
+  _req: Request,
   { params }: { params: { id: string } }
 ) {
   const events = (await kv.get<CalendarEvent[]>(KEY)) ?? [];
@@ -27,9 +28,9 @@ export async function GET(
   return NextResponse.json(item);
 }
 
-// /api/events/[id] PUT (작성자만)
+// ✅ PUT (작성자만)
 export async function PUT(
-  req: NextRequest,
+  req: Request,
   { params }: { params: { id: string } }
 ) {
   const session = await getServerSession(authOptions);
@@ -56,9 +57,9 @@ export async function PUT(
   return NextResponse.json(updated);
 }
 
-// /api/events/[id] DELETE (작성자만)
+// ✅ DELETE (작성자만)
 export async function DELETE(
-  _req: NextRequest,
+  _req: Request,
   { params }: { params: { id: string } }
 ) {
   const session = await getServerSession(authOptions);
